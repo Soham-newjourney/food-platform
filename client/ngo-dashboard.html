@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NGO Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <h2>NGO Panel</h2>
+        <button onclick="showSection('dashboard')">Dashboard</button>
+        <button onclick="showSection('immediate')">Nearby Immediate</button>
+        <button onclick="showSection('scheduled')">Nearby Scheduled</button>
+        <button onclick="showSection('beneficiary')">Beneficiary Requests</button>
+        <button onclick="logout()">Logout</button>
+    </aside>
+
+    <main class="content">
+
+        <div id="dashboard">
+            <h2>NGO Dashboard</h2>
+            <div class="dashboard-card">
+                <p>Active Immediate: <span id="activeImmediate">0</span></p>
+                <p>Active Scheduled: <span id="activeScheduled">0</span></p>
+                <p>Total Beneficiary Requests: <span id="totalRequests">0</span></p>
+            </div>
+            <button onclick="loadAnalytics()">Refresh Stats</button>
+        </div>
+
+        <div id="immediate" class="section-hidden">
+            <h2>Nearby Immediate Donations</h2>
+            <button onclick="getLocation()">Use My Location</button>
+            <button onclick="loadImmediate()">Load</button>
+            <div id="immediateContainer"></div>
+        </div>
+
+        <div id="scheduled" class="section-hidden">
+            <h2>Nearby Scheduled Donations</h2>
+            <button onclick="loadScheduled()">Load</button>
+            <div id="scheduledContainer"></div>
+        </div>
+
+        <div id="beneficiary" class="section-hidden">
+            <h2>Beneficiary Requests</h2>
+            <button onclick="loadBeneficiary()">Load Requests</button>
+            <div id="beneficiaryContainer"></div>
+        </div>
+
+    </main>
+
+</div>
+
+<script src="js/ngo.js"></script>
+
+</body>
+</html>

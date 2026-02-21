@@ -1,0 +1,167 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, select {
+            display: block;
+            margin: 10px auto;
+            padding: 8px;
+            width: 250px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+        }
+        #locationStatus {
+            font-size: 14px;
+            color: green;
+        }
+        #message {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Register</h2>
+
+<input type="text" id="name" placeholder="Name" />
+<input type="email" id="email" placeholder="Email" />
+<input type="password" id="password" placeholder="Password" />
+<input type="text" id="phone" placeholder="Phone" />
+
+<select id="role">
+    <option value="donor">Donor</option>
+    <option value="ngo">NGO</option>
+    <option value="beneficiary">Beneficiary</option>
+</select>
+
+<button type="button" onclick="getLocation()">Get My Location</button>
+<p id="locationStatus"></p>
+
+<button onclick="register()">Register</button>
+
+<p id="message"></p>
+
+<script>
+
+let userLongitude = null
+let userLatitude = null
+
+function getLocation() {
+
+    if (!navigator.geolocation) {
+        document.getElementById("locationStatus").innerText = "Geolocation not supported"
+        return
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            userLatitude = position.coords.latitude
+            userLongitude = position.coords.longitude
+
+            document.getElementById("locationStatus").innerText =
+                "Location captured successfully"
+        },
+        (error) => {
+            document.getElementById("locationStatus").innerText =
+                "Location access denied"
+        }
+    )
+}
+
+async function register() {
+
+    const name = document.getElementById("name").value
+    const email = document.getElementById("email").value
+    const password = document.getElementById("password").value
+    const phone = document.getElementById("phone").value
+    const role = document.getElementById("role").value
+
+    if (userLatitude === null || userLongitude === null) {
+        document.getElementById("message").innerText =
+            "Please get your location first"
+        return
+    }
+
+    const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name,
+            email,
+            password,
+            phone,
+            role,
+            location: {
+                type: "Point",
+                coordinates: [userLongitude, userLatitude]
+            }
+        })
+    })
+
+    const data = await response.json()
+
+    document.getElementById("message").innerText = data.message
+
+    if (response.status === 201) {
+        setTimeout(() => {
+            window.location.href = "login.html"
+        }, 1500)
+    }
+}
+
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register | FoodBridge</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="auth-container">
+    <div class="auth-card">
+
+        <h2>Create Account</h2>
+
+        <input type="text" id="name" placeholder="Full Name" />
+        <input type="email" id="email" placeholder="Email" />
+        <input type="password" id="password" placeholder="Password" />
+        <input type="text" id="phone" placeholder="Phone Number" />
+
+        <select id="role">
+            <option value="donor">Donor</option>
+            <option value="ngo">NGO</option>
+            <option value="beneficiary">Beneficiary</option>
+        </select>
+
+        <button onclick="getLocation()">Use My Location</button>
+        <button onclick="register()">Register</button>
+
+        <p id="message"></p>
+
+        <div class="auth-link">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </div>
+
+    </div>
+</div>
+
+<script src="js/auth.js"></script>
+
+</body>
+</html>

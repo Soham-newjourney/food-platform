@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat | FoodBridge</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <h2>Chat Room</h2>
+        <button onclick="goBack()">Back</button>
+        <button onclick="logout()">Logout</button>
+    </aside>
+
+    <main class="content">
+
+        <h2 id="roomTitle">Chat</h2>
+
+        <!-- <div id="chatContainer" class="dashboard-card" style="height:400px; overflow-y:auto;"></div>-->
+         <div id="chatContainer" class="dashboard-card chat-container"></div> 
+
+        <div style="margin-top:20px;">
+            <input type="text" id="messageInput" placeholder="Type message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+
+    </main>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/chat.js"></script>
+
+</body>
+</html>

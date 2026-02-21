@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donor Dashboard | FoodBridge</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <h2>Donor Panel</h2>
+        <button onclick="showSection('dashboard')">Dashboard</button>
+        <button onclick="showSection('immediate')">Immediate Donation</button>
+        <button onclick="showSection('scheduled')">Scheduled Donation</button>
+        <button onclick="logout()">Logout</button>
+    </aside>
+
+    <main class="content">
+
+        <!-- DASHBOARD SECTION -->
+        <div id="dashboard">
+            <h2>My Donations</h2>
+            <!-- Donations will load here dynamically -->
+        </div>
+
+        <!-- IMMEDIATE DONATION SECTION -->
+        <div id="immediate" class="section-hidden">
+            <h2>Create Immediate Donation</h2>
+
+            <input type="text" id="foodDescription" placeholder="Food Description" />
+            <input type="text" id="quantity" placeholder="Quantity" />
+
+            <button onclick="getLocation()">Use My Location</button>
+            <button onclick="createDonation()">Create Donation</button>
+
+            <p id="message"></p>
+        </div>
+
+        <!-- SCHEDULED DONATION SECTION -->
+        <div id="scheduled" class="section-hidden">
+            <h2>Create Scheduled Donation</h2>
+
+            <input type="text" id="sFoodDescription" placeholder="Food Description" />
+            <input type="text" id="sQuantity" placeholder="Quantity" />
+            <input type="datetime-local" id="pickupDate" />
+
+            <button onclick="getLocation()">Use My Location</button>
+            <button onclick="createScheduled()">Create Scheduled Donation</button>
+        </div>
+
+    </main>
+
+</div>
+
+<script src="js/donor.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Beneficiary Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <h2>Beneficiary Panel</h2>
+        <button onclick="showSection('dashboard')">Dashboard</button>
+        <button onclick="showSection('create')">Create Request</button>
+        <button onclick="showSection('active')">Active Requests</button>
+        <button onclick="logout()">Logout</button>
+    </aside>
+
+    <main class="content">
+
+        <div id="dashboard">
+            <h2>Dashboard Overview</h2>
+            <div class="dashboard-card">
+                <p>Active Requests: <span id="activeCount">0</span></p>
+            </div>
+            <button onclick="loadMyRequests()">Refresh</button>
+        </div>
+
+        <div id="create" class="section-hidden">
+            <h2>Create Assistance Request</h2>
+
+            <input type="text" id="description" placeholder="Description" />
+            <input type="text" id="quantityNeeded" placeholder="Quantity Needed" />
+
+            <button onclick="getLocation()">Use My Location</button>
+            <button onclick="createRequest()">Submit Request</button>
+
+            <p id="message"></p>
+        </div>
+
+        <div id="active" class="section-hidden">
+            <h2>My Active Requests</h2>
+            <div id="requestsContainer"></div>
+        </div>
+
+    </main>
+
+</div>
+
+<script src="js/beneficiary.js"></script>
+
+</body>
+</html>
